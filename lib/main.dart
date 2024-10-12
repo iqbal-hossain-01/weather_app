@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<WeatherProvider>().getCurrentWeather();
+    context.read<WeatherProvider>().getForecastWeather();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
