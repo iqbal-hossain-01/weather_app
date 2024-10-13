@@ -9,11 +9,19 @@ import 'package:weather_app_by_notes/utils/constants.dart';
 class WeatherProvider extends ChangeNotifier {
   double latitude = 41.0080675, longitude = 28.9799905;
   String unit = metric;
+  String unitSymbol = celsius;
   String baseURL = 'https://api.openweathermap.org/data/2.5';
   CurrentWeather? current;
   ForecastWeather? forecast;
 
-  getCurrentWeather() async {
+  bool get hasDataLoaded => current != null && forecast != null;
+
+  Future<void> getWeatherData() async {
+    await _getCurrentWeather();
+    await _getForecastWeather();
+  }
+
+  _getCurrentWeather() async {
     String url = '$baseURL/weather?lat=$latitude&lon=$longitude&units=$unit&appid=$weatherApiKey';
 
     try {
@@ -33,7 +41,7 @@ class WeatherProvider extends ChangeNotifier {
 
   }
   
-  getForecastWeather() async {
+  _getForecastWeather() async {
     String url = '$baseURL/forecast?lat=$latitude&lon=$longitude&units=$unit&appid=$weatherApiKey';
     
     try {

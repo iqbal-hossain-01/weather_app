@@ -5,6 +5,6 @@ class CitiesTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Cities Content'),);
+    return const Center(child: Text('Cities Content'),);
   }
 }
